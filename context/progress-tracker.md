@@ -4,23 +4,27 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Not started
+- Feature 01: Design System — completed
 
 ## Current Goal
 
-- Define the immediate implementation goal here.
+- Feature 02: Authentication (Clerk)
 
 ## Completed
 
-- None yet.
+- Installed shadcn/ui and lucide-react
+- Defined dark theme CSS tokens in globals.css
+- Created `lib/utils.ts` with `cn()` helper (clsx + tailwind-merge)
+- Added 7 UI primitives: Button, Card, Dialog, Input, Tabs, Textarea, ScrollArea
+- Fixed shadcn CSS variables in `:root` to use dark values (removed light `.dark` fallback)
 
 ## In Progress
 
-- None yet.
+- None.
 
 ## Next Up
 
-- Add the next planned feature unit here.
+- Feature 02: Authentication (Clerk)
 
 ## Open Questions
 

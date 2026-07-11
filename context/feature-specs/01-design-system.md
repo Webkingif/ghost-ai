@@ -2,9 +2,7 @@ Read `AGENTS.md` before starting.
 
 We're adding the design system and UI primitive components.
 
-Install and configure `shadcn/ui`.
-
-Add these shadcn components:
+`shadcn` has been installed and the following components have been added:
 - Button
 - Card
 - Dialog
@@ -15,7 +13,7 @@ Add these shadcn components:
 
 Do not modify the generated `components/ui/*` files after installation.
 
-Also Install `lucide-react`.
+`lucide-react` has been installed
 
 Create `lib/utils.ts` with a reusable `cn()` helper for merging Tailwind classes.
 
