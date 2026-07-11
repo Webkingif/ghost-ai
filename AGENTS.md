@@ -20,3 +20,12 @@ Read the following files in order before implementing or making any architectura
 Update `context/progress-tracker.md` after each meaningful implementation change.
 
 If implementation changes the architecture, scope, or standards documented in the context files, update the relevant file before continuing.
+
+## Project Instructions
+
+- Use `pnpm` for all package management tasks.
+- Never use `npm` or `yarn`.
+- Install dependencies with `pnpm install`
+- Add packages with `pnpm add`.
+- Run scripts with `pnpm <script>` or `pnpm run <script>`
+- Assume this repository uses a `pnpm-lock.yaml` lockfile.
