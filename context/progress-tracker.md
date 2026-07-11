@@ -36,4 +36,6 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Session Notes
 
-- Add context needed to resume work in the next session.
+- Populated `globals.css` with dark theme: Tailwind v4 `@theme inline` block, `:root` CSS custom properties matching UI context values, `@custom-variant dark`, and base body styles.
+- Added `dark` class to `<html>` in `layout.tsx` so shadcn component `dark:` variant classes activate properly.
+- All 7 UI components (Button, Card, Dialog, Input, Tabs, Textarea, ScrollArea) were already using semantic tokens — no component changes needed.
