@@ -1,5 +1,6 @@
 "use client"
 
+import { UserButton } from "@clerk/nextjs"
 import { PanelLeftOpen, PanelLeftClose } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -20,7 +21,20 @@ function EditorNavbar({ sidebarOpen, onToggleSidebar }: EditorNavbarProps) {
         {sidebarOpen ? <PanelLeftClose /> : <PanelLeftOpen />}
       </Button>
       <div className="flex-1" />
-      <div />
+      <UserButton
+        appearance={{
+          variables: {
+            colorBackground: "var(--bg-surface)",
+            colorPrimary: "var(--accent-primary)",
+            colorForeground: "var(--text-primary)",
+            colorPrimaryForeground: "var(--primary-foreground)",
+            colorMuted: "var(--bg-subtle)",
+            colorMutedForeground: "var(--text-secondary)",
+            colorNeutral: "var(--text-muted)",
+            borderRadius: "var(--radius)",
+          },
+        }}
+      />
     </nav>
   )
 }

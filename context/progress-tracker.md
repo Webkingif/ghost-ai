@@ -5,12 +5,15 @@ Update this file whenever the current phase, active feature, or implementation s
 ## Current Phase
 
 - Feature 01: Design System — completed
+- Feature 02: Authentication (Clerk) — completed
 
 ## Current Goal
 
-- Feature 02: Authentication (Clerk)
+- Feature 03: Canvas (React Flow integration)
 
 ## Completed
+
+### Feature 01 — Design System
 
 - Installed shadcn/ui and lucide-react
 - Defined dark theme CSS tokens in globals.css
@@ -21,13 +24,17 @@ Update this file whenever the current phase, active feature, or implementation s
 - Created ProjectSidebar — floating overlay sidebar (w-72) with backdrop, Tabs (My Projects / Shared), empty placeholder states, and "New Project" button
 - Wired editor chrome into page.tsx
 
-## In Progress
+### Feature 02 — Authentication (Clerk)
 
-- None.
-
-## Next Up
-
-- Feature 03: Canvas (React Flow integration) or continue Feature 02 as specified
+- Installed `@clerk/ui` for themes
+- Added `NEXT_PUBLIC_CLERK_SIGN_IN_URL` and `NEXT_PUBLIC_CLERK_SIGN_UP_URL` env vars
+- Created `proxy.ts` at root with protected-first middleware (public: `/sign-in`, `/sign-up`)
+- Wrapped root layout with `ClerkProvider`, applied `dark` theme from `@clerk/ui/themes`, mapped appearance variables to app CSS custom properties
+- Created `app/sign-in/[[...sign-in]]/page.tsx` — two-panel layout (left: logo/tagline/features, right: `<SignIn />`), responsive with form-only on small screens
+- Created `app/sign-up/[[...sign-up]]/page.tsx` — same layout with `<SignUp />`
+- Created `app/editor/page.tsx` — moved editor chrome from root page to `/editor`
+- Updated `app/page.tsx` — server component that redirects authenticated users to `/editor`, others to `/sign-in`
+- Added `UserButton` to editor navbar right section with CSS variable-based appearance
 
 ## Open Questions
 
