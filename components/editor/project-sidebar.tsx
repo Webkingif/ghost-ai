@@ -1,17 +1,68 @@
 "use client"
 
-import { XIcon, Plus } from "lucide-react"
+import { XIcon, Plus, Pencil, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
+import type { Project } from "@/lib/types"
 
 interface ProjectSidebarProps {
   isOpen: boolean
   onClose: () => void
+  projects: Project[]
+  onNewProject: () => void
+  onRename: (project: Project) => void
+  onDelete: (project: Project) => void
 }
 
-function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
+function ProjectItem({
+  project,
+  onRename,
+  onDelete,
+}: {
+  project: Project
+  onRename: (project: Project) => void
+  onDelete: (project: Project) => void
+}) {
+  return (
+    <div className="group flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-muted">
+      <span className="flex-1 truncate text-sm">{project.name}</span>
+      {project.isOwner && (
+        <div className="flex shrink-0 gap-0.5 opacity-0 group-hover:opacity-100">
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            onClick={() => onRename(project)}
+            aria-label={`Rename ${project.name}`}
+          >
+            <Pencil className="h-3 w-3" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            onClick={() => onDelete(project)}
+            aria-label={`Delete ${project.name}`}
+          >
+            <Trash2 className="h-3 w-3" />
+          </Button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ProjectSidebar({
+  isOpen,
+  onClose,
+  projects,
+  onNewProject,
+  onRename,
+  onDelete,
+}: ProjectSidebarProps) {
+  const ownedProjects = projects.filter((p) => p.isOwner)
+  const sharedProjects = projects.filter((p) => !p.isOwner)
+
   return (
     <>
       {isOpen && (
@@ -52,21 +103,47 @@ function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
           </TabsList>
           <TabsContent value="my-projects" className="flex-1 overflow-hidden px-4 pb-4 pt-4">
             <ScrollArea className="h-full">
-              <p className="pt-12 text-center text-sm text-muted-foreground">
-                No projects yet
-              </p>
+              {ownedProjects.length === 0 ? (
+                <p className="pt-12 text-center text-sm text-muted-foreground">
+                  No projects yet
+                </p>
+              ) : (
+                <div className="space-y-0.5">
+                  {ownedProjects.map((project) => (
+                    <ProjectItem
+                      key={project.id}
+                      project={project}
+                      onRename={onRename}
+                      onDelete={onDelete}
+                    />
+                  ))}
+                </div>
+              )}
             </ScrollArea>
           </TabsContent>
           <TabsContent value="shared" className="flex-1 overflow-hidden px-4 pb-4 pt-4">
             <ScrollArea className="h-full">
-              <p className="pt-12 text-center text-sm text-muted-foreground">
-                No shared projects yet
-              </p>
+              {sharedProjects.length === 0 ? (
+                <p className="pt-12 text-center text-sm text-muted-foreground">
+                  No shared projects yet
+                </p>
+              ) : (
+                <div className="space-y-0.5">
+                  {sharedProjects.map((project) => (
+                    <ProjectItem
+                      key={project.id}
+                      project={project}
+                      onRename={onRename}
+                      onDelete={onDelete}
+                    />
+                  ))}
+                </div>
+              )}
             </ScrollArea>
           </TabsContent>
         </Tabs>
         <div className="p-4">
-          <Button className="w-full" size="sm">
+          <Button className="w-full" size="sm" onClick={onNewProject}>
             <Plus className="h-4 w-4" />
             New Project
           </Button>

@@ -9,7 +9,8 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Goal
 
-- Feature 03: Canvas (React Flow integration)
+- Feature 04: Project Dialogs — completed
+- Feature 05: Canvas (React Flow integration)
 
 ## Completed
 
@@ -35,6 +36,17 @@ Update this file whenever the current phase, active feature, or implementation s
 - Created `app/editor/page.tsx` — moved editor chrome from root page to `/editor`
 - Updated `app/page.tsx` — server component that redirects authenticated users to `/editor`, others to `/sign-in`
 - Added `UserButton` to editor navbar right section with CSS variable-based appearance
+
+### Feature 04 — Project Dialogs
+
+- Created `lib/types.ts` — `Project` interface (id, name, slug, isOwner)
+- Created `lib/data.ts` — `slugify()` utility and `MOCK_PROJECTS` array
+- Created `hooks/use-project-dialogs.ts` — dedicated hook managing dialog state, form state, project list, loading state, and all actions (create/rename/delete)
+- Created `components/editor/create-project-dialog.tsx` — name input with live slug preview, Cancel/Create footer
+- Created `components/editor/rename-project-dialog.tsx` — prefilled input with auto-focus, Enter-to-submit, Cancel/Rename footer
+- Created `components/editor/delete-project-dialog.tsx` — destructive confirmation, Cancel/Delete (destructive variant) footer
+- Modified `components/editor/project-sidebar.tsx` — renders project items with hover-reveal rename (Pencil) and delete (Trash2) actions for owned projects; shared projects shown without actions; wires buttons to parent
+- Modified `app/editor/page.tsx` — replaced canvas placeholder with editor home content (heading, description, New Project button), wired `useProjectDialogs` hook, renders all three dialogs
 
 ## Open Questions
 
