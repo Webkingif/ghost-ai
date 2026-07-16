@@ -43,7 +43,7 @@ export function useProjectDialogs() {
     setIsSubmitting(true)
     const newProject: Project = {
       id: String(Date.now()),
-      name: projectName.trim(),
+      name: slug,
       slug: slug,
       isOwner: true,
     }
@@ -57,12 +57,12 @@ export function useProjectDialogs() {
     setProjects((prev) =>
       prev.map((p) =>
         p.id === selectedProject.id
-          ? { ...p, name: projectName.trim(), slug: slugify(projectName.trim()) }
+          ? { ...p, name: slug, slug }
           : p
       )
     )
     closeDialog()
-  }, [selectedProject, projectName, closeDialog])
+  }, [selectedProject, projectName, slug, closeDialog])
 
   const handleDelete = useCallback(() => {
     if (!selectedProject) return
