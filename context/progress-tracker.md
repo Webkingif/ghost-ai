@@ -9,10 +9,11 @@ Update this file whenever the current phase, active feature, or implementation s
 - Feature 04: Project Dialogs — completed
 - Feature 05: Prisma Data Models — completed
 - Feature 06: Project APIs — completed
+- Feature 07: Wire Editor Home — completed
 
 ## Current Goal
 
-- Feature 07: Canvas (React Flow integration)
+- Feature next: Canvas (React Flow integration)
 
 ## Completed
 
@@ -64,6 +65,20 @@ Update this file whenever the current phase, active feature, or implementation s
 - Created `app/api/projects/[projectId]/route.ts` — `PATCH` renames project; `DELETE` removes project
 - Both mutation routes enforce auth (`401`) and owner check (`403`)
 - Non-owner or non-existent project returns `404`
+
+### Feature 07 — Wire Editor Home
+
+- Modified `POST /api/projects` to accept client-provided `id` for project/room ID alignment
+- Created `lib/projects.ts` — server-side `getOwnedProjects()` and `getSharedProjects()` using Prisma directly
+- Created `hooks/use-project-actions.ts` — real API-calling hook replacing mock `useProjectDialogs`:
+  - Create: generates suffix, builds room ID from slug + suffix, POSTs to API, navigates to workspace
+  - Rename: PATCHes API, refreshes server components
+  - Delete: DELETEs API, redirects to `/editor` if deleting active workspace, otherwise refreshes
+- Converted `app/editor/page.tsx` to server component fetching owned + shared projects via Clerk auth + data helper
+- Created `app/editor/editor-home-client.tsx` — client component receiving server-fetched projects as initial data
+- Updated `create-project-dialog.tsx` — shows room ID preview instead of slug
+- Removed unused `slug` field from `project-sidebar.tsx` Project interface
+- Deleted `hooks/use-project-dialogs.ts` (replaced by `use-project-actions`)
 
 ## Open Questions
 

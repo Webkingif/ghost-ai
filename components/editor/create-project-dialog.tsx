@@ -16,7 +16,7 @@ interface CreateProjectDialogProps {
   onOpenChange: (open: boolean) => void
   projectName: string
   onProjectNameChange: (value: string) => void
-  slug: string
+  roomId: string
   onCreate: () => void
   isSubmitting: boolean
 }
@@ -26,7 +26,7 @@ function CreateProjectDialog({
   onOpenChange,
   projectName,
   onProjectNameChange,
-  slug,
+  roomId,
   onCreate,
   isSubmitting,
 }: CreateProjectDialogProps) {
@@ -51,9 +51,9 @@ function CreateProjectDialog({
               }
             }}
           />
-          {projectName && (
+          {roomId && (
             <p className="text-xs text-muted-foreground">
-              slug: {slug}
+              Room: {roomId}
             </p>
           )}
         </div>

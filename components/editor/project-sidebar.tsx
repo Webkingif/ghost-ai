@@ -8,7 +8,9 @@ import { cn } from "@/lib/utils"
 interface Project {
   id: string
   name: string
-  slug: string
+  ownerId: string
+  createdAt: string
+  updatedAt: string
   isOwner: boolean
 }
 
