@@ -8,10 +8,11 @@ Update this file whenever the current phase, active feature, or implementation s
 - Feature 02: Authentication (Clerk) — completed
 - Feature 04: Project Dialogs — completed
 - Feature 05: Prisma Data Models — completed
+- Feature 06: Project APIs — completed
 
 ## Current Goal
 
-- Feature 06: Canvas (React Flow integration)
+- Feature 07: Canvas (React Flow integration)
 
 ## Completed
 
@@ -56,6 +57,13 @@ Update this file whenever the current phase, active feature, or implementation s
 - Removed mock `Project` interface from `lib/types.ts` and `MOCK_PROJECTS` from `lib/data.ts`; defined local `Project` interface in the hook and sidebar component
 - Ran `prisma migrate dev --create-only --name init` — generated migration SQL with both tables, enum, indexes, and foreign key
 - Generated Prisma Client to `lib/generated/prisma/`
+
+### Feature 06 — Project APIs
+
+- Created `app/api/projects/route.ts` — `GET` lists current user's projects ordered by `createdAt desc`; `POST` creates a project (defaults name to `Untitled Project`, uses `@default(cuid())` ID strategy)
+- Created `app/api/projects/[projectId]/route.ts` — `PATCH` renames project; `DELETE` removes project
+- Both mutation routes enforce auth (`401`) and owner check (`403`)
+- Non-owner or non-existent project returns `404`
 
 ## Open Questions
 
