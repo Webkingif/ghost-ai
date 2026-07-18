@@ -6,11 +6,12 @@ Update this file whenever the current phase, active feature, or implementation s
 
 - Feature 01: Design System — completed
 - Feature 02: Authentication (Clerk) — completed
+- Feature 04: Project Dialogs — completed
+- Feature 05: Prisma Data Models — completed
 
 ## Current Goal
 
-- Feature 04: Project Dialogs — completed
-- Feature 05: Canvas (React Flow integration)
+- Feature 06: Canvas (React Flow integration)
 
 ## Completed
 
@@ -48,13 +49,22 @@ Update this file whenever the current phase, active feature, or implementation s
 - Modified `components/editor/project-sidebar.tsx` — renders project items with hover-reveal rename (Pencil) and delete (Trash2) actions for owned projects; shared projects shown without actions; wires buttons to parent
 - Modified `app/editor/page.tsx` — replaced canvas placeholder with editor home content (heading, description, New Project button), wired `useProjectDialogs` hook, renders all three dialogs
 
+### Feature 05 — Prisma Data Models
+
+- Created `prisma/models/project.prisma` with `Status` enum, `Project` and `ProjectCollaborator` models, indexes, unique constraints, and cascade delete relation
+- Created `lib/prisma.ts` as a cached singleton branching on `DATABASE_URL` — uses Accelerate (`accelerateUrl`) for `prisma+postgres://`, direct `@prisma/adapter-pg` for `postgres://`
+- Removed mock `Project` interface from `lib/types.ts` and `MOCK_PROJECTS` from `lib/data.ts`; defined local `Project` interface in the hook and sidebar component
+- Ran `prisma migrate dev --create-only --name init` — generated migration SQL with both tables, enum, indexes, and foreign key
+- Generated Prisma Client to `lib/generated/prisma/`
+
 ## Open Questions
 
 - Add unresolved product or implementation questions here.
 
 ## Architecture Decisions
 
-- Add decisions that affect the system design or data model.
+- Mock `Project` interface removed from `lib/types.ts` — Prisma-generated types will replace it when API routes are built.
+- `DATABASE_URL` copied from `.env.local` to `.env` so Prisma CLI can resolve it via `dotenv/config` in `prisma.config.ts`.
 
 ## Session Notes
 

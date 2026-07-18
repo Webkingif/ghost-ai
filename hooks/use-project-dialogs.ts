@@ -1,8 +1,14 @@
 "use client"
 
 import { useState, useCallback, useMemo } from "react"
-import type { Project } from "@/lib/types"
-import { slugify, MOCK_PROJECTS } from "@/lib/data"
+import { slugify } from "@/lib/data"
+
+interface Project {
+  id: string
+  name: string
+  slug: string
+  isOwner: boolean
+}
 
 export type DialogState = "create" | "rename" | "delete" | null
 
@@ -10,7 +16,7 @@ export function useProjectDialogs() {
   const [dialogState, setDialogState] = useState<DialogState>(null)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [projectName, setProjectName] = useState("")
-  const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS)
+  const [projects, setProjects] = useState<Project[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const slug = useMemo(() => slugify(projectName), [projectName])

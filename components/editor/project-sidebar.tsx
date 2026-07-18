@@ -5,7 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
-import type { Project } from "@/lib/types"
+interface Project {
+  id: string
+  name: string
+  slug: string
+  isOwner: boolean
+}
 
 interface ProjectSidebarProps {
   isOpen: boolean
