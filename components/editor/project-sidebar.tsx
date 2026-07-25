@@ -21,19 +21,27 @@ interface ProjectSidebarProps {
   onNewProject: () => void
   onRename: (project: Project) => void
   onDelete: (project: Project) => void
+  activeProjectId?: string
 }
 
 function ProjectItem({
   project,
   onRename,
   onDelete,
+  isActive,
 }: {
   project: Project
   onRename: (project: Project) => void
   onDelete: (project: Project) => void
+  isActive?: boolean
 }) {
   return (
-    <div className="group flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-muted">
+    <div
+      className={cn(
+        "group flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-muted",
+        isActive && "bg-accent-primary-dim"
+      )}
+    >
       <span className="flex-1 truncate text-sm">{project.name}</span>
       {project.isOwner && (
         <div className="flex shrink-0 gap-0.5 opacity-0 group-hover:opacity-100">
@@ -66,6 +74,7 @@ function ProjectSidebar({
   onNewProject,
   onRename,
   onDelete,
+  activeProjectId,
 }: ProjectSidebarProps) {
   const ownedProjects = projects.filter((p) => p.isOwner)
   const sharedProjects = projects.filter((p) => !p.isOwner)
@@ -116,12 +125,13 @@ function ProjectSidebar({
                 </p>
               ) : (
                 <div className="space-y-0.5">
-                  {ownedProjects.map((project) => (
+                    {ownedProjects.map((project) => (
                     <ProjectItem
                       key={project.id}
                       project={project}
                       onRename={onRename}
                       onDelete={onDelete}
+                      isActive={project.id === activeProjectId}
                     />
                   ))}
                 </div>
@@ -142,6 +152,7 @@ function ProjectSidebar({
                       project={project}
                       onRename={onRename}
                       onDelete={onDelete}
+                      isActive={project.id === activeProjectId}
                     />
                   ))}
                 </div>

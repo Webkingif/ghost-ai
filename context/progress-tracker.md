@@ -15,6 +15,17 @@ Update this file whenever the current phase, active feature, or implementation s
 
 - Feature next: Canvas (React Flow integration)
 
+### Feature 08 — Editor Workspace Shell — completed
+
+- Created `lib/project-access.ts` — `getCurrentIdentity()` returns `{ userId, email }` via Clerk; `checkProjectAccess()` queries Prisma to verify owner or collaborator status
+- Created `components/editor/access-denied.tsx` — client component with centered layout, lock icon, message, and "Back to Editor" button
+- Created `app/editor/[roomId]/page.tsx` — server component with server-side access checks: unauthenticated users redirect to `/sign-in`, unauthorized/missing projects render `AccessDenied`, authorized users get the workspace layout
+- Created `app/editor/[roomId]/workspace-client.tsx` — client component managing sidebar and AI panel state, rendering the full-viewport workspace layout
+- Extended `components/editor/editor-navbar.tsx` — added optional `projectName`, `onShare`, `onToggleAI`, `aiOpen` props for workspace context
+- Extended `components/editor/project-sidebar.tsx` — added optional `activeProjectId` prop with `isActive` highlighting using `bg-accent-primary-dim`
+- Canvas and AI chat areas are placholder text only — no real canvas logic, Liveblocks, sharing, or AI behavior
+- TypeScript check passes with zero errors
+
 ## Completed
 
 ### Feature 01 — Design System
